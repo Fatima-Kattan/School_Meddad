@@ -68,7 +68,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td><strong>{{ $teacher->name }}</strong></td>
                                         <td>{{ $teacher->email }}</td>
-                                        <td>{{ $teacher->phone ?? 'N/A' }}</td>
+                                        <td>{{ $teacher->phone ?? '_' }}</td>
                                         <td>
                                             <span class="tx-purple-600 fw-bold">
                                                 {{ $teacher->specialization ?? 'Not Specified' }}

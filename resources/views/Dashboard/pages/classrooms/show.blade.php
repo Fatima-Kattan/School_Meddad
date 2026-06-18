@@ -2,12 +2,27 @@
 
 @section('title', 'Classroom Details')
 @section('page_title', 'Classroom Details')
-@section('breadcrumb', 'View classroom details')
+
+@section('breadcrumb')
+    <li class="breadcrumb-item">
+        <a href="{{ route('dashboard.index') }}" style="color: #6c757d; text-decoration: none;">
+            Dashboard
+        </a>
+    </li>
+    <li class="breadcrumb-item">
+        <a href="{{ route('dashboard.classrooms.index') }}" style="color: #6c757d; text-decoration: none;">
+            Classrooms
+        </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+        <span style="color: #4e73df; font-weight: 500;">Show</span>
+    </li>
+@endsection
 
 @section('content')
     <div class="row">
         <div class="col-12">
-            {{-- معلومات الصف --}}
+            {{-- ===== Classroom Information ===== --}}
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">
@@ -37,7 +52,7 @@
                                 <tr>
                                     <th>Capacity</th>
                                     <td>
-                                        <span class="badge bg-info">
+                                        <span class="badge" style="background-color: #6f42c1; color: #fff; padding: 6px 12px;">
                                             <i class="fas fa-users me-1"></i>
                                             {{ $classroom->capacity }} Students
                                         </span>
@@ -46,7 +61,7 @@
                                 <tr>
                                     <th>Total Students</th>
                                     <td>
-                                        <span class="badge bg-success">
+                                        <span class="badge" style="background-color: #4e73df; color: #fff; padding: 6px 12px;">
                                             <i class="fas fa-user-graduate me-1"></i>
                                             {{ $classroom->students->count() }} Students
                                         </span>
@@ -55,7 +70,7 @@
                                 <tr>
                                     <th>Total Teachers</th>
                                     <td>
-                                        <span class="badge bg-warning text-dark">
+                                        <span class="badge" style="background-color: #1cc88a; color: #fff; padding: 6px 12px;">
                                             <i class="fas fa-chalkboard-teacher me-1"></i>
                                             {{ $classroom->teachers->count() }} Teachers
                                         </span>
@@ -72,7 +87,7 @@
                             </table>
                         </div>
                         <div class="col-md-6">
-                            {{-- Statistics Department --}}
+                            {{-- Statistics --}}
                             <div class="row">
                                 <div class="col-6">
                                     <div class="card bg-primary text-white">
@@ -108,13 +123,9 @@
                                     <div class="card bg-success text-white">
                                         <div class="card-body text-center">
                                             @php
-                                                $percentage =
-                                                    $classroom->capacity > 0
-                                                        ? round(
-                                                            ($classroom->students->count() / $classroom->capacity) *
-                                                                100,
-                                                        )
-                                                        : 0;
+                                                $percentage = $classroom->capacity > 0 
+                                                    ? round(($classroom->students->count() / $classroom->capacity) * 100) 
+                                                    : 0;
                                             @endphp
                                             <h1 class="display-4">{{ $percentage }}%</h1>
                                             <p class="mb-0">
@@ -129,9 +140,9 @@
                 </div>
             </div>
 
-            {{-- Student list --}}
+            {{-- ===== Students List ===== --}}
             <div class="card mb-4">
-                <div class="card-header justify-content-between d-flex align-items-center">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">
                         <i class="fas fa-user-graduate me-2 text-success"></i>Students in this Classroom
                         <span class="badge bg-success ms-2">{{ $classroom->students->count() }}</span>
@@ -142,15 +153,15 @@
                 <div class="card-body">
                     @if ($classroom->students->count() > 0)
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped">
+                            <table class="table table-hover table-striped align-middle">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>#</th>
+                                        <th width="50">#</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Birth Date</th>
-                                        <th class="text-center">Actions</th>
+                                        <th width="150" class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -159,8 +170,8 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td><strong>{{ $student->name }}</strong></td>
                                             <td>{{ $student->email }}</td>
-                                            <td>{{ $student->phone ?? ' ' }}</td>
-                                            <td>{{ $student->birth_date ?? ' ' }}</td>
+                                            <td>{{ $student->phone ?: '—' }}</td>
+                                            <td>{{ $student->birth_date ?: '—' }}</td>
                                             <td class="text-center">
                                                 <x-buttons.action-buttons
                                                     editRoute="{{ route('dashboard.students.edit', $student->id) }}"
@@ -183,9 +194,9 @@
                 </div>
             </div>
 
-            {{-- Teacher list --}}
+            {{-- ===== Teachers List ===== --}}
             <div class="card">
-                <div class="card-header justify-content-between d-flex align-items-center">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">
                         <i class="fas fa-chalkboard-teacher me-2 text-warning"></i>Teachers in this Classroom
                         <span class="badge bg-warning ms-2">{{ $classroom->teachers->count() }}</span>
@@ -196,15 +207,15 @@
                 <div class="card-body">
                     @if ($classroom->teachers->count() > 0)
                         <div class="table-responsive">
-                            <table class="table table-hover table-striped">
+                            <table class="table table-hover table-striped align-middle">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>#</th>
+                                        <th width="50">#</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Specialization</th>
-                                        <th class="text-center">Actions</th>
+                                        <th width="150" class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -213,10 +224,10 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td><strong>{{ $teacher->name }}</strong></td>
                                             <td>{{ $teacher->email }}</td>
-                                            <td>{{ $teacher->phone ?? '_' }}</td>
+                                            <td>{{ $teacher->phone ?: '—' }}</td>
                                             <td>
-                                                <span class="badge bg-info">
-                                                    {{ $teacher->specialization ?? 'Not Specified' }}
+                                                <span class="badge" style="background-color: #6f42c1; color: #fff;">
+                                                    {{ $teacher->specialization ?: 'Not Specified' }}
                                                 </span>
                                             </td>
                                             <td class="text-center">
@@ -233,7 +244,6 @@
                         <div class="text-center py-4">
                             <i class="fas fa-chalkboard-teacher fa-3x text-muted d-block mb-3"></i>
                             <h5>No Teachers Assigned</h5>
-
                             <p class="text-muted">No teachers are currently assigned to this classroom.</p>
                             <x-buttons.add-button route="{{ route('dashboard.teachers.create') }}" label="Add New Teacher"
                                 icon="fas fa-plus" color="indigo" size="ms" />

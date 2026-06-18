@@ -67,7 +67,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td><strong>{{ $student->name }}</strong></td>
                                         <td>{{ $student->email }}</td>
-                                        <td>{{ $student->phone ?? 'N/A' }}</td>
+                                        <td>{{ $student->phone ?? '_' }}</td>
                                         <td>
                                             @if ($student->classroom)
                                                 <span class="badge bg-purple-600 text-sm px-3 py-1">

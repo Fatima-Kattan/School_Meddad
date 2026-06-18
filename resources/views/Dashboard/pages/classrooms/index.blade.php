@@ -67,7 +67,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><strong>{{ $classroom->name }}</strong></td>
-                                        <td>{{ $classroom->description ?? 'N/A' }}</td>
+                                        <td>{{ $classroom->description ?? '_' }}</td>
                                         <td>
                                             <span class="badge bg-purple-600 text-sm px-3 py-1">
                                                 <i class="fas fa-users me-1"></i>
