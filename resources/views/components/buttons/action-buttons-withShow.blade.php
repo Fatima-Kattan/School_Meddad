@@ -1,12 +1,12 @@
 @props([
     'editRoute' => '#',
     'deleteRoute' => '#',
-    'showRoute' => null,  // ✅ إضافة showRoute
+    'showRoute' => null,
     'confirmMessage' => 'Are you sure you want to delete this item?',
 ])
 
 <div class="d-flex gap-1 justify-content-center">
-    {{-- ✅ زر العرض --}}
+    {{--  زر العرض --}}
     @if($showRoute)
         <a href="{{ $showRoute }}" class="btn btn-info btn-sm" title="View Details">
             <i class="fas fa-eye"></i>

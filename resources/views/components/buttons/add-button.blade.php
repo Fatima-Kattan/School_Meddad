@@ -1,15 +1,14 @@
 @props([
-    'route' => '#', // الرابط
-    'label' => 'Add New', // النص الظاهر
-    'icon' => 'fas fa-plus', // الأيقونة
-    'size' => 'sm', // الحجم: sm, md, lg
-    'color' => 'indigo', // اللون: indigo, blue, green, red, yellow, purple, pink, gray
-    'target' => '_self', // _self, _blank
-    'permission' => null, // صلاحية معينة (اختياري)
+    'route' => '#', 
+    'label' => 'Add New', 
+    'icon' => 'fas fa-plus', 
+    'size' => 'sm', 
+    'color' => 'indigo', 
+    'target' => '_self', 
+    'permission' => null, 
 ])
 
 @php
-    // الألوان المتاحة
     $colors = [
         'indigo' => 'bg-indigo-500 hover:bg-indigo-600 focus:ring-indigo-300',
         'blue' => 'bg-blue-500 hover:bg-blue-600 focus:ring-blue-300',
@@ -21,7 +20,6 @@
         'gray' => 'bg-gray-500 hover:bg-gray-600 focus:ring-gray-300',
     ];
 
-    // الحجوم
     $sizes = [
         'sm' => 'px-3 py-1.5 text-sm',
         'md' => 'px-4 py-2 text-base',
@@ -33,7 +31,6 @@
 @endphp
 
 @if ($permission && !auth()->user()->can($permission))
-    {{-- إذا كان المستخدم ليس لديه صلاحية، لا نعرض الزر --}}
 @else
     <a href="{{ $route }}" target="{{ $target }}"
         class="inline-flex items-center px-2 py-2 gap-1.5 rounded font-medium text-white shadow-sm transition-all duration-200 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 {{ $colorClass }} {{ $sizeClass }}">
