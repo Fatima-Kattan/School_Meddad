@@ -57,6 +57,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
+                                    <th>Birth Date</th>
                                     <th>Classroom</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
@@ -68,6 +69,7 @@
                                         <td><strong>{{ $student->name }}</strong></td>
                                         <td>{{ $student->email }}</td>
                                         <td>{{ $student->phone ?? '_' }}</td>
+                                        <td>{{ $student->birth_date ? $student->birth_date->format('d/m/Y') : '_' }}</td>
                                         <td>
                                             @if ($student->classroom)
                                                 <span class="badge bg-purple-600 text-sm px-3 py-1">
@@ -90,7 +92,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="text-center py-4">
+                                        <td colspan="7" class="text-center py-4">
                                             <i class="fas fa-user-graduate fa-3x text-muted d-block mb-3"></i>
                                             <h5>No Students Found</h5>
                                             <p class="text-muted">Click "Add New" to create your first student.</p>
