@@ -46,7 +46,7 @@ class StudentsController extends Controller
             'email' => 'required|string|email|max:150|unique:students,email',
             'phone' => 'nullable|string|max:20',
             'birth_date' => 'nullable|date',
-            'classroom_id' => 'nullable|exists:classrooms,id|required',
+            'classroom_id' => 'nullable|exists:classrooms,id',
         ]);
 
         Student::create($data);
@@ -69,7 +69,7 @@ class StudentsController extends Controller
             'email' => 'required|string|email|max:150|unique:students,email,' . $student->id,
             'phone' => 'nullable|string|max:20',
             'birth_date' => 'nullable|date',
-            'classroom_id' => 'nullable|exists:classrooms,id|required',
+            'classroom_id' => 'nullable|exists:classrooms,id',
         ]);
 
         $student->update($data);

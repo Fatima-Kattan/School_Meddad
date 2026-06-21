@@ -47,7 +47,7 @@ class TeachersController extends Controller
             'email' => 'required|string|email|max:150|unique:teachers,email',
             'phone' => 'nullable|string|max:20',
             'specialization' => 'nullable|string|max:100',
-            'classroom_id' => 'nullable|exists:classrooms,id|required',
+            'classroom_id' => 'nullable|exists:classrooms,id',
         ]);
 
         Teacher::create($data);
@@ -70,7 +70,7 @@ class TeachersController extends Controller
             'email' => 'required|string|email|max:150|unique:teachers,email,' . $teacher->id,
             'phone' => 'nullable|string|max:20',
             'specialization' => 'nullable|string|max:100',
-            'classroom_id' => 'nullable|exists:classrooms,id|required',
+            'classroom_id' => 'nullable|exists:classrooms,id',
         ]);
 
         $teacher->update($data);
